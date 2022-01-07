@@ -376,7 +376,7 @@ For a selected piece of code, you can access various code reference information 
 - Quick Definition - where and how symbols (functions, parameters, classes, fields, and methods) are defined
 - Quick Type Definition - type definition of variables, fields or any other symbols
 - Quick Documentation - inline documentation (*docstrings*) for any symbol created in accordance with [PEP-257](../05-coding-conventions/index.html#documentation-strings-aka-docstrings))
-- Parameter Info - the names of parameters in method and function calls
+- Parameter Info - the names and expected types of parameters in method and function calls. Use this when cursor is on the argument of a function call.
 - Type Info - type of an expression
 
 ![Code References Functionality in PyCharm](../fig/pycharm-code-reference.png){: .image-with-shadow width="1000px" }
