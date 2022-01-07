@@ -109,7 +109,9 @@ For example, package installation and virtual environments would need to be mana
 invocations should remain the same regardless of the Python distribution used.
 
 To download a Python distribution for your operating system,
-please head to [Python.org](https://www.python.org/downloads/).
+please head to [Python.org](https://www.python.org/downloads/). If you are on
+Linux, it is likely that the system Python already installed will satisfy the
+requirements of this course. Check its version using the commands below.
 >## Recommended Python Version
 > We recommend using at least Python version 3.8+ but any [supported version](https://devguide.python.org/#status-of-python-branches) should work (i.e. 3.7 onward.
 > Specifically, we recommend upgrading from Python 2.7 wherever possible. Continuing to use it will likely result in difficulty finding supported dependencies or syntax errors.
