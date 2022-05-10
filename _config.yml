@@ -91,6 +91,7 @@ extras_order:
   - figures
   - guide
   - discuss
+  - vscode
   - databases
   - verifying-code-style-linters
   - quiz
