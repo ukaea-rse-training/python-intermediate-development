@@ -161,6 +161,7 @@ Our test also didn't specify what the structure of our output data should be, so
 # file: inflammation/serializers.py
 
 import json
+from inflammation import models
 
 class PatientSerializer:
     model = models.Patient
