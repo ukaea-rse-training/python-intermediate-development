@@ -198,12 +198,12 @@ jobs:
     # Next we need to checkout out repository, and set up Python
     # A 'name' is just an optional label shown in the log - helpful to clarify progress - and can be anything
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v2
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
       with:
-        python-version: "3.9"
+        python-version: "3.11"
 
     - name: Install Python dependencies
       run: |
@@ -240,8 +240,8 @@ Each of these steps are:
 
 - **Checkout repository for the job:**
   `uses` indicates that want to use a GitHub Action called `checkout` that does this
-- **Set up Python 3.9:**
-  here we use the `setup-python` Action, indicating that we want Python version 3.9.
+- **Set up Python 3.11:**
+  here we use the `setup-python` Action, indicating that we want Python version 3.11.
   Note we specify the version within quotes,
   to ensure that this is interpreted as a complete string.
   Otherwise, if we wanted to test against for example Python 3.10,
@@ -339,7 +339,7 @@ we can use a feature called **build matrices**
 which really shows the value of using CI to test at scale.
 
 Suppose the intended users of our software use either Ubuntu, Mac OS, or Windows,
-and either have Python version 3.8, 3.9 or 3.10 installed,
+and either have Python version 3.10, 3.11 or 3.12 installed,
 and we want to support all of these.
 Assuming we have a suitable test suite,
 it would take a considerable amount of time to set up testing platforms
@@ -361,10 +361,11 @@ So, our `.github/workflows/main.yml` should look like the following:
 
 ~~~
 ...
+    # we can also specify the OS (and python version) to run tests on
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: ["3.10", "3.11", "3.12"]
 
     runs-on: {% raw %}${{ matrix.os }}{% endraw %}
 
@@ -376,10 +377,10 @@ So, our `.github/workflows/main.yml` should look like the following:
     # Next we need to checkout out repository, and set up Python
     # A 'name' is just an optional label shown in the log - helpful to clarify progress - and can be anything
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
       with:
         python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
 ...
@@ -388,9 +389,11 @@ So, our `.github/workflows/main.yml` should look like the following:
 
 The `{% raw %}${{ }}{% endraw %}` are used
 as a means to reference configuration values from the matrix.
-This way, every possible permutation of Python versions 3.8, 3.9, and 3.10
+This way, every possible permutation of Python versions 3.10, 3.11, and 3.12
 with the latest versions of Ubuntu, Mac OS and Windows operating systems
-will be tested and we can expect 9 build jobs in total.
+will be tested and we can expect 9 build jobs in total. We can also use this in
+the name of the step to accurately reflect what it is doing (e.g., which python
+version is being setup)
 
 Let's commit and push this change and see what happens:
 
